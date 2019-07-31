@@ -1,8 +1,8 @@
-require('./config')
+//require('./config')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000
+// const port = process.env.PORT || 3000
 const Routes = require('./routes/routes')
 
 const cors = require('cors')

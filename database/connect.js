@@ -1,17 +1,17 @@
-const mysql =require('mysql')
-const env =require('../config')
+require('dotenv/config')
+const mysql = require('mysql')
 
 const conn = mysql.createConnection({
-    host: env.HOST,
-    user: env.USER,
-    password: env.PASSWORD,
-    database: env.DATABASE
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 })
 
-conn.connect(function(err) {
+conn.connect(function (err) {
     if (err) {
         console.log(err);
-    }else{
+    } else {
         console.log('connect succesfully')
     }
 })

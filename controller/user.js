@@ -47,17 +47,18 @@ exports.insert = (req, res) => {
                                             if (error) {
                                                 res.status(400).json('insert error')
                                             } else {
-                                                const id = rowsss.insertId
-                                                const data = {
-                                                    status: 202,
-                                                    message: "Data has been saved",
-                                                    result: {
-                                                        id: id,
-                                                        username: username,
-                                                        email: email
+                                                connect.query(
+                                                    `SELECT *  FROM user ORDER BY id DESC LIMIT 1`, function(error, rowssss, field){
+                                                        if(error){
+                                                            console.log(error);
+                                                        }else{
+                                                            return res.send({
+                                                                data 	: rowssss,
+                                                                message : "Data has been saved"
+                                                            })
+                                                        }
                                                     }
-                                                }
-                                                res.status(202).json(data).end()
+                                                )
                                             }
                                         }
                                     )
@@ -88,7 +89,8 @@ exports.login = function (req, res) {
             }
             else {
                 if (rows != '') {
-                    jwt.sign({ rows }, rows[0].id, (err, token) => {
+                    jwt.sign({rows},"secretKey", (err, token)=> {
+                        console.log("token"+token)
                         return res.send({
                             status: 200,
                             data: rows,
